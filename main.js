@@ -1,5 +1,7 @@
+LipsX = 0;
+LipsY = 0;
 function preload() {
-
+    lipstick = loadImage('lipstick.png');
 }
 
 function setup() {
@@ -13,8 +15,11 @@ function setup() {
     poseNet.on('pose', getPoses);
 }
 
+
+
 function draw() {
     image(video, 0, 0, 300, 300);
+    image(lipstick, LipsX, LipsY, 30, 20);
 }
 
 function take_snapshot() {
@@ -28,7 +33,9 @@ function modelLoaded() {
 function getPoses(results) {
     if(results.length > 0) {
         console.log(results);
-        console.log("nose x =" +results[0].pose.nose.x);
-        console.log("nose y =" +results[0].pose.nose.y);
+        console.log("lip x =" +results[0].pose.nose.x);
+        console.log("lip y =" +results[0].pose.nose.y);
     }
+    LipsX = results[0].pose.nose.x-10;
+LipsY = results[0].pose.nose.y+20;
 }
